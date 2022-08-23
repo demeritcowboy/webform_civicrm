@@ -1,0 +1,11 @@
+--- a/web/core/tests/Drupal/Tests/Listeners/HtmlOutputPrinterTrait.php
++++ b/web/core/tests/Drupal/Tests/Listeners/HtmlOutputPrinterTrait.php
+@@ -73,7 +73,7 @@ trait HtmlOutputPrinterTrait {
+       if ($contents) {
+         $this->writeNewLine();
+         $this->writeWithColor('bg-yellow, fg-black', 'HTML output was generated');
+-        $this->write($contents);
++//        $this->write($contents);
+       }
+       // No need to keep the file around any more.
+       unlink($this->browserOutputFile);
