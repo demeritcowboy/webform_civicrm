@@ -99,9 +99,10 @@ abstract class WebformCivicrmTestBase extends CiviCrmTestBase {
 
   protected function tearDown(): void {
     // store the civi log in the downloadable artifacts
+    \Civi\Test\Invasive::call(['CRM_Core_Error', 'generateLogFileName'], ['']);
     $logfile = \Civi::$statics['CRM_Core_Error']['logger_file'] ?? NULL;
     if ($logfile && file_exists($logfile)) {
-      copy($logfile, '/home/runner/drupal/web/sites/simpletest/browser_output/' . \CRM_Utils_File::makeFilenameWithUnicode($this->getName()) . '.log');
+      copy($logfile, DRUPAL_ROOT . '/sites/simpletest/browser_output/' . \CRM_Utils_File::makeFilenameWithUnicode($this->getName()) . '.log');
     }
     parent::tearDown();
   }
