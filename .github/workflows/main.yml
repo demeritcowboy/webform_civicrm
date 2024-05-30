@@ -110,12 +110,21 @@ jobs:
       - name: Download Webform
         run: |
           cd ~/drupal
-          COMPOSER_MEMORY_LIMIT=-1 composer require 'drupal/webform:^6.2'
+          #COMPOSER_MEMORY_LIMIT=-1 composer require 'drupal/webform:^6.2'
+          cd web/modules/contrib
+          git clone https://git.drupalcode.org/project/webform.git
+          cd webform
+          sed -i -e 's/10/11/' webform.info.yml
+          sed -i -e 's/10/11/' composer.json
       - name: Install webform_civicrm
         run: |
           cd ~/drupal
           # We used the github action `checkout` plugin at the start to check out the PR branch, and then set up a composer virtual `path` repo earlier when setting up composer config. So this should pull from that repo not the real one.
-          COMPOSER_MEMORY_LIMIT=-1 composer require drupal/webform_civicrm:@dev
+          #COMPOSER_MEMORY_LIMIT=-1 composer require drupal/webform_civicrm:@dev
+          cd web/modules/contrib
+          mkdir webform_civicrm
+          cd webform_civicrm
+          cp -a $GITHUB_WORKSPACE/* .
       - name: Install token
         run: |
           cd ~/drupal
