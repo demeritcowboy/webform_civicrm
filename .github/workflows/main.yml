@@ -116,6 +116,8 @@ jobs:
           cd webform
           sed -i -e 's/10/11/' webform.info.yml
           sed -i -e 's/10/11/' composer.json
+          cd modules/webform_ui
+          sed -i -e 's/10/11/' webform_ui.info.yml
       - name: Install webform_civicrm
         run: |
           cd ~/drupal
