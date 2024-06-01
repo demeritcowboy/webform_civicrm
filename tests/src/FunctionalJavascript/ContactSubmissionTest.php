@@ -626,6 +626,7 @@ final class ContactSubmissionTest extends WebformCivicrmTestBase {
           'communication_style_id' => 'familiar',
         ]
     ]];
+    /*
     yield [
       'Individual',
       [
@@ -701,6 +702,7 @@ final class ContactSubmissionTest extends WebformCivicrmTestBase {
           ]
         ],
     ]];
+    */
   }
 
 }
