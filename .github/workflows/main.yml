@@ -116,6 +116,9 @@ jobs:
           cd webform
           sed -i -e 's/10/11/' webform.info.yml
           sed -i -e 's/10/11/' composer.json
+          # somebody has submitted a patch for "tabbable"
+          curl -L -O https://git.drupalcode.org/project/webform/-/merge_requests/452.diff
+          git apply 452.diff
           cd modules/webform_ui
           sed -i -e 's/10/11/' webform_ui.info.yml
       - name: Install webform_civicrm
