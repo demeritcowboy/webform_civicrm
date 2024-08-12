@@ -105,6 +105,9 @@ jobs:
           cd web/modules/contrib
           git clone https://git.drupalcode.org/project/webform.git
           cd webform
+          # see if this does anything we weren't already doing
+          curl -L -O https://git.drupalcode.org/project/webform/-/merge_requests/499.diff
+          git apply 499.diff
           sed -i -e 's/10\.1/11/' webform.info.yml
           sed -i -e 's/10\.1/11/' composer.json
           # somebody has submitted a patch for "tabbable"
