@@ -73,7 +73,7 @@ jobs:
       # Temp thing
       - name: Try beta chrome
         run: |
-          sudo apt-get upgrade google-chrome-beta
+          sudo apt-get install google-chrome-beta
           google-chrome --version
       - name: Setup Drupal
         run: |
