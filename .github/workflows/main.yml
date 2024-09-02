@@ -71,10 +71,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install sendmail
       # Temp thing
-      - name: Downgrade chrome
+      - name: Try beta chrome
         run: |
-          curl -L -o chrome.deb http://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_127.0.6533.119-1_amd64.deb
-          sudo apt-get install libu2f-udev
+          curl -L -o chrome.deb http://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-beta/google-chrome-beta_129.0.6668.22-1_amd64.deb
           sudo dpkg -i chrome.deb
           google-chrome-stable --version
       - name: Setup Drupal
@@ -178,7 +177,7 @@ jobs:
       - uses: nanasess/setup-chromedriver@master
         with:
           # temporary to match downgraded chrome
-          chromedriver-version: '127.0.6533.119'
+          chromedriver-version: '129.0.6668.22'
       - name: Run chromedriver
         run: chromedriver &
       - name: Run php built-in server
