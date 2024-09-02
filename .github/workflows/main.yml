@@ -73,9 +73,8 @@ jobs:
       # Temp thing
       - name: Try beta chrome
         run: |
-          curl -L -o chrome.deb http://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-beta/google-chrome-beta_129.0.6668.22-1_amd64.deb
-          sudo dpkg -i chrome.deb
-          google-chrome-stable --version
+          sudo apt-get upgrade google-chrome-beta
+          google-chrome --version
       - name: Setup Drupal
         run: |
           COMPOSER_MEMORY_LIMIT=-1 composer create-project drupal/recommended-project:${{ matrix.drupal }} ~/drupal --no-interaction --no-install
