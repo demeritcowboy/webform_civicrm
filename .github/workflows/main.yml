@@ -73,7 +73,9 @@ jobs:
       # Temp thing
       - name: Try beta chrome
         run: |
-          sudo apt-get install google-chrome-beta
+          sudo apt purge -y google-chrome
+          curl -L -o chrome.deb http://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-beta/google-chrome-beta_129.0.6668.22-1_amd64.deb
+          sudo dpkg -i chrome.deb
           google-chrome --version
       - name: Setup Drupal
         run: |
