@@ -74,7 +74,7 @@ jobs:
       - name: Try beta chrome
         run: |
           sudo apt purge -y google-chrome-stable
-          curl -L -o chrome.deb http://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-beta/google-chrome-beta_129.0.6668.22-1_amd64.deb
+          curl -L -o chrome.deb http://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-unstable/google-chrome-unstable_130.0.6683.2-1_amd64.deb
           sudo dpkg -i chrome.deb
           google-chrome --version
       - name: Setup Drupal
@@ -178,7 +178,7 @@ jobs:
       - uses: nanasess/setup-chromedriver@master
         with:
           # temporary to match downgraded chrome
-          chromedriver-version: '129.0.6668.22'
+          chromedriver-version: '130.0.6683.2'
       - name: Run chromedriver
         run: chromedriver --port=9515 &
       - name: Run php built-in server
