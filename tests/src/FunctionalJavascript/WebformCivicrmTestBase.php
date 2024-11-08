@@ -367,6 +367,9 @@ abstract class WebformCivicrmTestBase extends CiviCrmTestBase {
     }
 
     if ($enableStatic) {
+      $this->assertTrue($this->getSession()->wait(120000, 'jQuery("div.form-item--properties-title input#title").length > 0'), 'Wow it is taking more than 120 seconds.');
+      $this->assertTrue($this->getSession()->wait(120000, 'jQuery("div.form-item--properties-title input#title")[0].checkVisibility()'), 'Wow it is taking more than 120 seconds from the time it exists until it is visible.');
+      $this->createScreenshot($this->htmlOutputDirectory . '/hello.png');
       $this->getSession()->getPage()->selectFieldOption("properties[civicrm_live_options]", 0);
       $this->assertSession()->waitForField('properties[options][options][civicrm_option_1][enabled]', 5000);
 
