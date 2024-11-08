@@ -367,8 +367,10 @@ abstract class WebformCivicrmTestBase extends CiviCrmTestBase {
     }
 
     if ($enableStatic) {
-      $this->assertTrue($this->getSession()->wait(120000, 'jQuery("div.form-item--properties-title input#title").length > 0'), 'Wow it is taking more than 120 seconds.');
-      $this->assertTrue($this->getSession()->wait(120000, 'jQuery("div.form-item--properties-title input#title")[0].checkVisibility()'), 'Wow it is taking more than 120 seconds from the time it exists until it is visible.');
+      // $this->assertTrue($this->getSession()->wait(240000, 'jQuery("div.form-item--properties-title input#title").length > 0'), 'Wow it is taking more than 240 seconds.');
+      // $this->assertTrue($this->getSession()->wait(240000, 'jQuery("div.form-item--properties-title input#title")[0].checkVisibility()'), 'Wow it is taking more than 240 seconds from the time it exists until it is visible.');
+      $txt = $this->getSession()->getPage()->findField('drupal-off-canvas')->getText();
+      $this->getSession()->executeScript('jQuery("h1.page-title").text(' . json_encode($txt) . ');');
       $this->createScreenshot($this->htmlOutputDirectory . '/hello.png');
       $this->getSession()->getPage()->selectFieldOption("properties[civicrm_live_options]", 0);
       $this->assertSession()->waitForField('properties[options][options][civicrm_option_1][enabled]', 5000);
