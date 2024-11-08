@@ -13,6 +13,7 @@ abstract class WebformCivicrmTestBase extends CiviCrmTestBase {
 
   use WebformBrowserTestTrait;
   use \Drupal\Tests\mink_civicrm_helpers\Traits\Utils;
+  use \Drupal\Tests\system\Traits\OffCanvasTestTrait;
 
   /**
    * {@inheritdoc}
@@ -24,6 +25,7 @@ abstract class WebformCivicrmTestBase extends CiviCrmTestBase {
     'token',
     'ckeditor5',
     'mink_civicrm_helpers',
+    'off_canvas_test',
   ];
 
   /**
@@ -357,7 +359,10 @@ abstract class WebformCivicrmTestBase extends CiviCrmTestBase {
   protected function editCivicrmOptionElement($selector, $multiple = TRUE, $enableStatic = FALSE, $default = NULL, $type = NULL, $singleOption = FALSE, $asList = FALSE, $secondarySelector = 'li.edit') {
     $checkbox_edit_button = $this->assertSession()->elementExists('css', '[data-drupal-selector="' . $selector . '"] ' . ($secondarySelector ? "$secondarySelector " : '') . 'a.webform-ajax-link');
     $checkbox_edit_button->click();
-    $this->assertSession()->waitForField('drupal-off-canvas');
+    // TODO: looking at the code for waitForField, it doesn't fail if not found within the time, it just returns null, so all this is doing is waiting 10 seconds
+    // $this->assertSession()->waitForField('drupal-off-canvas');
+    $this->waitForOffCanvasArea();
+
     $this->htmlOutput();
     if ($type) {
       $this->assertSession()->elementExists('css', '[data-drupal-selector="edit-change-type"]')->click();
@@ -369,8 +374,8 @@ abstract class WebformCivicrmTestBase extends CiviCrmTestBase {
     if ($enableStatic) {
       // $this->assertTrue($this->getSession()->wait(240000, 'jQuery("div.form-item--properties-title input#title").length > 0'), 'Wow it is taking more than 240 seconds.');
       // $this->assertTrue($this->getSession()->wait(240000, 'jQuery("div.form-item--properties-title input#title")[0].checkVisibility()'), 'Wow it is taking more than 240 seconds from the time it exists until it is visible.');
-      $txt = $this->getSession()->getPage()->findField('drupal-off-canvas')->getText();
-      $this->getSession()->executeScript('jQuery("h1.page-title").text(' . json_encode($txt) . ');');
+      $txt = $this->getSession()->getPage()->find('css', '.ui-dialog-off-canvas')->getText();
+      $this->getSession()->executeScript('jQuery("h1.page-title").text("' . strlen($txt) . '");');
       $this->createScreenshot($this->htmlOutputDirectory . '/hello.png');
       $this->getSession()->getPage()->selectFieldOption("properties[civicrm_live_options]", 0);
       $this->assertSession()->waitForField('properties[options][options][civicrm_option_1][enabled]', 5000);
