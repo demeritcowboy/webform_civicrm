@@ -610,8 +610,8 @@ States. State/Province - New Jersey.
 
     // Place fields for each contact on their own page and enable saving drafts
     $webform =  Webform::load($this->webform->getOriginalId());
-    $this->htmlOutput('raw elements is ' . var_export($webform->get('elements'), true));
     $elements = Yaml::decode($webform->get('elements'));
+    $this->htmlOutput('id is ' . $this->webform->getOriginalId() . ' raw elements is ' . var_export($webform->get('elements'), true) . ' elements is ' . var_export($elements, true));
     $elements_new = [
       'page1' => ['#type' => 'webform_wizard_page', '#title' => 'Page 1', 'civicrm_1_contact_1_fieldset_fieldset' => $elements["civicrm_1_contact_1_fieldset_fieldset"]],
       'page2' => ['#type' => 'webform_wizard_page', '#title' => 'Page 2', 'civicrm_2_contact_1_fieldset_fieldset' => $elements["civicrm_2_contact_1_fieldset_fieldset"]],
