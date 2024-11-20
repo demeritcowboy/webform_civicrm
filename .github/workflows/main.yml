@@ -102,6 +102,12 @@ jobs:
         run: |
           cd ~/drupal
           COMPOSER_MEMORY_LIMIT=-1 composer require 'drupal/webform:6.3.x-dev@dev'
+          cd web/modules/contrib/webform
+          # somebody has submitted a patch for "tabbable"
+          curl -L -O https://git.drupalcode.org/project/webform/-/merge_requests/452.diff
+          git apply 452.diff
+          # use newer version of select2 that doesn't call jQuery.isArray
+          sed -i -e 's/4\.0\.13/4.1.0-rc.0/' webform.libraries.yml
       - name: Install webform_civicrm
         run: |
           cd ~/drupal
