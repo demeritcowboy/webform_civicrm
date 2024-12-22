@@ -102,9 +102,6 @@ jobs:
         run: |
           cd ~/drupal
           COMPOSER_MEMORY_LIMIT=-1 composer require 'drupal/webform:6.3.x-dev@dev'
-          cd web/modules/contrib/webform
-          # use newer version of select2 that doesn't call jQuery.isArray
-          sed -i -e 's/4\.0\.13/4.1.0-rc.0/' webform.libraries.yml
       - name: Install webform_civicrm
         run: |
           cd ~/drupal
