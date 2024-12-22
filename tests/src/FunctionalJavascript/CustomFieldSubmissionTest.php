@@ -339,6 +339,8 @@ final class CustomFieldSubmissionTest extends WebformCivicrmTestBase {
     $this->getSession()->getPage()->pressButton('_qf_Field_done-bottom');
 
     //Reload the webform page - the custom field should be removed.
+    // something something cache something...
+    drupal_flush_all_caches();
     $this->drupalGet($this->webform->toUrl('canonical'));
     $this->htmlOutput();
     $this->assertPageNoErrorMessages();
@@ -351,6 +353,8 @@ final class CustomFieldSubmissionTest extends WebformCivicrmTestBase {
     $this->getSession()->getPage()->checkField(version_compare(\CRM_Core_BAO_Domain::version(), '5.75.alpha1', '<') ? 'Active?' : 'Active');
     $this->getSession()->getPage()->pressButton('_qf_Field_done-bottom');
 
+    // something something cache something...
+    drupal_flush_all_caches();
     $this->drupalGet($this->webform->toUrl('canonical'));
     $this->htmlOutput();
     $this->assertPageNoErrorMessages();
