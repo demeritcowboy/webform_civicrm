@@ -108,7 +108,7 @@ class WebformAjax extends WebformCivicrmBase implements WebformAjaxInterface {
         $sp = \CRM_Core_DAO::VALUE_SEPARATOR;
         $utils = \Drupal::service('webform_civicrm.utils');
         $this->enabled = $utils->wf_crm_enabled_fields($webform);
-        list(, $c, ) = explode('_', $element['#form_key'], 3);
+        list(, $c, ) = explode('_', $element['#form_key'] ?? $element['#webform_key'], 3);
         $this->ent['contact'][$c]['id'] = (int) $_GET['cid'];
         // Redact fields if they are to be hidden unconditionally, otherwise they are needed on the client side
         $to_hide = [];

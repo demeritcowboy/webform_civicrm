@@ -219,7 +219,7 @@ class CivicrmOptions extends OptionsBase {
   protected function prepareElementValidateCallbacks(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
     parent::prepareElementValidateCallbacks($element, $webform_submission);
     // Disable default form validation on state select field, since options are loaded via js.
-    if (strpos($element['#form_key'], 'state_province_id') !== false) {
+    if (strpos($element['#form_key'] ?? $element['#webform_key'], 'state_province_id') !== false) {
       unset($element['#needs_validation']);
       $element['#validated'] = TRUE;
     }
